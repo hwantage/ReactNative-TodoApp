@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Button} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Keyboard} from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
@@ -31,6 +31,7 @@ const TodoInsert = ({onAddTodo}) => {
   const todoInputHandler = newText => {
     setInputText(newText);
   };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -39,6 +40,7 @@ const TodoInsert = ({onAddTodo}) => {
         placeholderTextColor={'#999'}
         autoCorrect={false}
         onChangeText={todoInputHandler}
+        onSubmitEditing={addTodoHandler}
         value={inputText}
       />
       <View style={styles.button}>

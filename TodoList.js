@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {default as Text} from './components/CustomText';
 
 const styles = StyleSheet.create({
   text: {
@@ -44,9 +39,6 @@ const styles = StyleSheet.create({
     color: '#bbb',
     textDecorationLine: 'line-through',
   },
-  unstrikeText: {
-    color: '#29323c',
-  },
   buttonContainer: {
     marginVertical: 10,
     marginHorizontal: 10,
@@ -69,11 +61,7 @@ const TodoList = ({todos, onRemove, onToggle}) => {
               )}
             </View>
           </TouchableOpacity>
-          <Text
-            style={[
-              styles.text,
-              todo.checked ? styles.strikeText : styles.unstrikeText,
-            ]}>
+          <Text style={[styles.text, todo.checked && styles.strikeText]}>
             {todo.textValue}
           </Text>
           <TouchableOpacity style={styles.buttonContainer}>

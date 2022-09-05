@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {default as Text} from './components/CustomText';
 
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
