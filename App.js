@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {default as Text} from './components/CustomText';
-
+import {useIntl} from 'react-native-international';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const {t, locale, getLanguages, changeLocale} = useIntl();
+
+  console.log(locale);
+  console.log(getLanguages());
+  changeLocale('ko');
 
   const addTodo = text => {
     setTodos([
@@ -53,7 +58,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.appTitle}>Simple Todo App</Text>
+      <Text style={styles.appTitle}>{t('title')}</Text>
       <View style={styles.card}>
         {/* TodoInsert */}
         <TodoInsert onAddTodo={addTodo} />
