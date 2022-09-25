@@ -1,0 +1,8 @@
+{
+  "title": "심플 {{str}} 앱",
+  "add_placeholder": "할일을 입력해 주세요.",
+  "button": {
+    "add": "추가",
+    "save": "저장"
+  }
+}

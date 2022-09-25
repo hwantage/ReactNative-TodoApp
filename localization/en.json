@@ -1,0 +1,8 @@
+{
+  "title": "Simple {{str}} app",
+  "add_placeholder": "Add items",
+  "button": {
+    "add": "Add",
+    "save": "Save"
+  }
+}

@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import i18next from './localization/i18n';
 
 const styles = StyleSheet.create({
   input: {
@@ -26,10 +28,17 @@ interface Props {
 
 const TodoInsert = ({onAddTodo}: Props) => {
   const [inputText, setInputText] = useState<string>('');
+  const {t} = useTranslation();
 
   const addTodoHandler = () => {
     onAddTodo(inputText);
     setInputText('');
+    // 언어 변경 테스트
+    if (inputText.length % 2 === 0) {
+      i18next.changeLanguage('en');
+    } else {
+      i18next.changeLanguage('ko');
+    }
   };
 
   const todoInputHandler = (newText: string) => {
@@ -40,7 +49,7 @@ const TodoInsert = ({onAddTodo}: Props) => {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
-        placeholder="할일을 입력해 주세요."
+        placeholder={t('add_placeholder', '할일을 입력해 주세요.')}
         placeholderTextColor={'#999'}
         autoCorrect={false}
         onChangeText={todoInputHandler}
@@ -48,7 +57,7 @@ const TodoInsert = ({onAddTodo}: Props) => {
         value={inputText}
       />
       <View style={styles.button}>
-        <Button title="추가" onPress={addTodoHandler} />
+        <Button title={t('button.add', '추가')} onPress={addTodoHandler} />
       </View>
     </View>
   );

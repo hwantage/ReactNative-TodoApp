@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {default as Text} from './components/CustomText';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
+import {useTranslation} from 'react-i18next';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +37,7 @@ interface Todo {
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const {t} = useTranslation();
 
   const addTodo = (text: string) => {
     setTodos([
@@ -58,7 +60,9 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.appTitle}>Simple to do app</Text>
+      <Text style={styles.appTitle}>
+        {t('title', '심플 할 일 앱', {str: '할 일'})}
+      </Text>
       <View style={styles.card}>
         {/* TodoInsert */}
         <TodoInsert onAddTodo={addTodo} />
