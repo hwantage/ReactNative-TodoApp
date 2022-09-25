@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {default as Text} from './components/CustomText';
-import {useIntl} from 'react-native-international';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
@@ -29,28 +28,29 @@ const styles = StyleSheet.create({
   },
 });
 
+interface Todo {
+  id: string;
+  textValue: string;
+  checked: boolean;
+}
+
 const App = () => {
-  const [todos, setTodos] = useState([]);
-  const {t, locale, getLanguages, changeLocale} = useIntl();
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  console.log(locale);
-  console.log(getLanguages());
-  changeLocale('ko');
-
-  const addTodo = text => {
+  const addTodo = (text: string) => {
     setTodos([
       ...todos,
       {id: Math.random().toString(), textValue: text, checked: false},
     ]);
   };
 
-  const onRemove = id => e => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const onRemove = (id: string) => {
+    setTodos(todos.filter((todo: Todo) => todo.id !== id));
   };
 
-  const onToggle = id => e => {
+  const onToggle = (id: string) => {
     setTodos(
-      todos.map(todo =>
+      todos.map((todo: Todo) =>
         todo.id === id ? {...todo, checked: !todo.checked} : todo,
       ),
     );
@@ -58,7 +58,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.appTitle}>{t('title')}</Text>
+      <Text style={styles.appTitle}>Simple to do app</Text>
       <View style={styles.card}>
         {/* TodoInsert */}
         <TodoInsert onAddTodo={addTodo} />

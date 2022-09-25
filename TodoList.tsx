@@ -45,12 +45,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const TodoList = ({todos, onRemove, onToggle}) => {
+interface Todo {
+  id: string;
+  textValue: string;
+  checked: boolean;
+}
+
+interface Props {
+  todos: Todo[];
+  onRemove: (id: string) => void;
+  onToggle: (id: string) => void;
+}
+
+const TodoList = ({todos, onRemove, onToggle}: Props) => {
   return (
     <ScrollView contentContainerStyle={styles.listContainer}>
-      {todos.map(todo => (
+      {todos.map((todo: Todo) => (
         <View style={styles.itemcontainer} key={todo.id}>
-          <TouchableOpacity onPressOut={onToggle(todo.id)}>
+          <TouchableOpacity onPressOut={() => onToggle(todo.id)}>
             <View style={styles.completeCircle}>
               {todo.checked ? (
                 <View style={styles.completeCircle}>
@@ -65,7 +77,7 @@ const TodoList = ({todos, onRemove, onToggle}) => {
             {todo.textValue}
           </Text>
           <TouchableOpacity style={styles.buttonContainer}>
-            <Text onPress={onRemove(todo.id)}>
+            <Text onPress={() => onRemove(todo.id)}>
               <Icon name="delete" size={30} color="#e33057" />
             </Text>
           </TouchableOpacity>

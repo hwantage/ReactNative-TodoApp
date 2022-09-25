@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
-import {useIntl} from 'react-native-international';
 
 const styles = StyleSheet.create({
   input: {
@@ -21,16 +20,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const TodoInsert = ({onAddTodo}) => {
-  const [inputText, setInputText] = useState('');
-  const {t} = useIntl();
+interface Props {
+  onAddTodo: (text: string) => void;
+}
+
+const TodoInsert = ({onAddTodo}: Props) => {
+  const [inputText, setInputText] = useState<string>('');
 
   const addTodoHandler = () => {
     onAddTodo(inputText);
     setInputText('');
   };
 
-  const todoInputHandler = newText => {
+  const todoInputHandler = (newText: string) => {
     setInputText(newText);
   };
 
@@ -38,7 +40,7 @@ const TodoInsert = ({onAddTodo}) => {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
-        placeholder={t('add_placeholder')}
+        placeholder="할일을 입력해 주세요."
         placeholderTextColor={'#999'}
         autoCorrect={false}
         onChangeText={todoInputHandler}
@@ -46,7 +48,7 @@ const TodoInsert = ({onAddTodo}) => {
         value={inputText}
       />
       <View style={styles.button}>
-        <Button title={t('add')} onPress={addTodoHandler} />
+        <Button title="추가" onPress={addTodoHandler} />
       </View>
     </View>
   );
