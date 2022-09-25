@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import i18next from './localization/i18n';
 
 const styles = StyleSheet.create({
   input: {
@@ -28,16 +27,16 @@ interface Props {
 
 const TodoInsert = ({onAddTodo}: Props) => {
   const [inputText, setInputText] = useState<string>('');
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const addTodoHandler = () => {
     onAddTodo(inputText);
     setInputText('');
     // 언어 변경 테스트
     if (inputText.length % 2 === 0) {
-      i18next.changeLanguage('en');
+      i18n.changeLanguage('en');
     } else {
-      i18next.changeLanguage('ko');
+      i18n.changeLanguage('ko');
     }
   };
 
